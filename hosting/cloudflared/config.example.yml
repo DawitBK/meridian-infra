@@ -1,0 +1,14 @@
+# Copy to %USERPROFILE%\.cloudflared\config.yml after `cloudflared tunnel create saas`.
+# Replace <TUNNEL-ID> and the hostname. The credentials file is created by cloudflared and stays in
+# your profile folder; it is a secret and must never be committed.
+tunnel: <TUNNEL-ID>
+credentials-file: C:\Users\<you>\.cloudflared\<TUNNEL-ID>.json
+
+ingress:
+  - hostname: api.example.com
+    # The nginx entry (hosting/nginx/render-entry.mjs), default port 15080.
+    service: http://127.0.0.1:15080
+    originRequest:
+      connectTimeout: 10s
+      noTLSVerify: false
+  - service: http_status:404
